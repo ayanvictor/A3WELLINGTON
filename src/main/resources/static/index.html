@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex4Money - Conversor de Moedas</title>
+    <link rel="stylesheet" href="/estilo/ferramenta.css">
+    <link rel="icon" href="/imagens/icone.ico" type="image/x-icon">
+</head>
+<body>
+
+    <!-- Botão de Logout -->
+    <button id="logoutButton" onclick="logout()">Logout</button>
+
+    <main>
+        <section id="ferramenta">
+            <h2>Conversor de Moedas</h2>
+            <div class="data-cotacao">
+                <label for="dataCotacao">Data de Cotação:</label>
+                <input type="text" id="dataCotacao" value="27/11/2024" readonly>
+            </div>
+            <p>Para usar o conversor de moedas é muito simples, selecione a moeda desejada,<br> insira o valor a ser convertido e clique no botão estilizado para ver o resultado.</p>
+            
+            <!-- Formulário de Conversão -->
+            <div class="form-container">
+                <form id="converterForm" onsubmit="event.preventDefault(); converter();">
+                    <div class="campo">
+                        <label for="moedaOrigem">Moeda de Origem: *</label>
+                        <select id="moedaOrigem" name="moedaOrigem" required>
+                            <option value="">Selecione</option>
+                            <option value="1">Dólar (USD)</option>
+                            <option value="2">Euro (EUR)</option>
+                            <option value="3">Real (BRL)</option>
+                            <option value="4">Iene (JPY)</option>
+                            <option value="5">Libra (GBP)</option>
+                        </select>
+                        <label for="valor">Valor: *</label>
+                        <input type="number" id="valor" name="valor" placeholder="Digite o valor" required min="0" step="0.01">
+                    </div>
+                    
+                    <div class="seta">
+                        <span>&rarr;</span> <!-- Seta para a direita -->
+                    </div>
+            
+                    <div class="campo">
+                        <label for="moedaDestino">Moeda de Destino: *</label>
+                        <select id="moedaDestino" name="moedaDestino" required>
+                            <option value="">Selecione</option>
+                            <option value="1">Dólar (USD)</option>
+                            <option value="2">Euro (EUR)</option>
+                            <option value="3">Real (BRL)</option>
+                            <option value="4">Iene (JPY)</option>
+                            <option value="5">Libra (GBP)</option>
+                        </select>
+                    </div>
+            
+                    <div class="resultado">
+                        <label for="resultado">Resultado:</label>
+                        <input type="text" id="resultado" readonly>
+                    </div>
+
+                    <div class="converter-container">
+                        <img src="/imagens/moeda.png" alt="Converter" id="converterButton" onclick="converter()" style="cursor: pointer;">
+                    </div>
+                    
+                </form>
+                <div class="observacao">Preenchimento obrigatório dos campos com ( * )</div> <!-- Frase de observação -->
+            </div>
+        </section>        
+    </main>
+
+    <footer>
+        <p>Flex4Money &copy; 2024</p>
+    </footer>
+
+    <script>
+        function logout() {
+            // Redireciona para a página de login
+            window.location.href = 'login.html'; // Substitua pelo caminho correto da sua página de login
+        }
+
+        async function converter() {
+    const valor = parseFloat(document.getElementById("valor").value);
+    const moedaOrigem = document.getElementById("moedaOrigem").value;
+    const moedaDestino = document.getElementById("moedaDestino").value;
+    const converterButton = document.getElementById("converterButton");
+
+    // Mapeamento de símbolos e códigos das moedas
+    const simbolosMoeda = {
+        1: "$",   // Dólar (USD)
+        2: "€",   // Euro (EUR)
+        3: "R$",   // Real (BRL)
+        4: "¥",   // Iene (JPY)
+        5: "£",  // Libra (GBP)
+    };
+
+    const codigosMoeda = {
+        1: "USD",
+        2: "EUR",
+        3: "BRL",
+        4: "JPY",
+        5: "GBP",
+    };
+
+    // Adiciona a classe de rotação
+    converterButton.classList.add("rotate");
+
+    try {
+        // Validações
+        if (!moedaOrigem) throw new Error("Selecione a moeda de origem.");
+        if (isNaN(valor) || valor <= 0) throw new Error("Por favor, insira um valor válido.");
+        if (!moedaDestino) throw new Error("Selecione a moeda de destino.");
+
+        // Aguarda a rotação (1 segundo para completar uma volta)
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        if (moedaOrigem === moedaDestino) {
+            const simbolo = simbolosMoeda[moedaDestino];
+            const codigo = codigosMoeda[moedaDestino];
+            document.getElementById("resultado").value = `${simbolo} ${valor.toFixed(2)} ${codigo}`;
+            return;
+        }
+
+        // Busca a taxa do back-end
+        const url = `http://localhost:8080/api/conversao/taxas?origemId=${moedaOrigem}&destinoId=${moedaDestino}`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Erro ao obter a taxa de câmbio.");
+
+        const taxa = await response.json();
+
+        // Calcula o valor convertido
+        const resultado = valor * taxa;
+
+        // Exibe o resultado com símbolo e código da moeda
+        const simbolo = simbolosMoeda[moedaDestino];
+        const codigo = codigosMoeda[moedaDestino];
+        document.getElementById("resultado").value = `${simbolo} ${resultado.toFixed(2)} ${codigo}`;
+    } catch (error) {
+        alert(error.message);
+    } finally {
+        // Remove a rotação
+        converterButton.classList.remove("rotate");
+    }
+}
+
+</script>
+</body>
+</html>

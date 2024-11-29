@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+    <link rel="stylesheet" href="/estilo/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="login" placeholder="Login" required>
+            <div class="senha-container">
+                <input type="password" id="senha" placeholder="Senha" required>
+                <span id="togglePassword" class="olho">👁️</span>
+            </div>
+            <button type="submit">Acessar</button>
+        </form>
+    </div>
+
+    <script>
+        // Função para alternar a visibilidade da senha
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordField = document.querySelector('#senha');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        // Função para enviar os dados do login
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const login = document.getElementById('login').value;
+            const senha = document.getElementById('senha').value;
+
+            const dados = { email: login, password: senha };
+
+            fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dados),
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = 'index.html'; // Redireciona para a página principal
+                } else {
+                    alert('E-mail ou senha incorretos!');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        });
+    </script>
+</body>
+</html>

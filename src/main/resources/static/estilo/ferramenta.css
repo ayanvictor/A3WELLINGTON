@@ -1,0 +1,242 @@
+/* Estiliza o corpo */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* ocupa a altura total da viewport */
+    font-family: 'Arial', sans-serif; /* fonte padrão */
+    background-color: #f9f9f9; /* cor de fundo suave */
+    overflow-x: hidden; /* Remove a barra de rolagem horizontal */
+    background-image: url('/imagens/fundo.jpg'); /* Define a imagem de fundo */
+    background-size: cover; /* Faz a imagem cobrir toda a área */
+    background-position: center; /* Centraliza a imagem */
+    margin: 0; /* Remove qualquer margem do body */
+}
+
+/* Estiliza o botão de logout com cor suave */
+#logoutButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #45a049;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s;
+}
+
+#logoutButton:hover {
+    background-color: #FF7F7F; /* Verde mais escuro no hover */
+}
+
+/* Estiliza o conteúdo principal */
+main {
+    flex: 1; /* permite que o main expanda */
+    display: flex;
+    justify-content: center; /* centraliza horizontalmente */
+    align-items: flex-start; /* alinha os itens ao topo */
+    padding: 20px; /* Adiciona padding para evitar que o conteúdo encoste nas bordas */
+    box-sizing: border-box; /* Garante que o padding não adicione tamanho ao elemento */
+}
+
+/* Estiliza o título com uma caixa verde e centralizado */
+#ferramenta h2 {
+    color: white; /* texto branco */
+    text-align: center; /* centralizar texto */
+    padding: 15px; /* espaçamento interno */
+    margin: 10px 0; /* margem superior e inferior reduzida */
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 200px; /* Ajuste para mover o parágrafo para a direita */
+}
+
+/* Estiliza o parágrafo */
+#ferramenta p {
+    text-align: center; /* centraliza o texto */
+    margin: 50px 0; /* margem superior e inferior reduzida */
+    margin-top: 50px; /* Ajuste a altura conforme necessário */
+    color: #f9f9f9;
+    margin-left: 200px; /* Ajuste para mover o parágrafo para a direita */
+}
+
+/* Estiliza a data de cotação */
+.data-cotacao {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.data-cotacao label {
+    margin-right: 5px;
+    color: white; /* Cor da data */
+}
+
+.data-cotacao input {
+    border: none;
+    background-color: transparent;
+    color: green; /* Cor da data */
+    font-weight: bold;
+}
+
+/* Estiliza o formulário */
+#converterForm {
+    display: flex;
+    align-items: center; /* Alinha verticalmente os itens */
+    gap: 20px; /* Espaçamento entre os elementos */
+    max-width: 610px; /* Largura máxima do formulário */
+    margin: 20px auto; /* Centraliza o formulário na página */
+    background-color: rgba(0, 0, 0, 0.3); /* Fundo branco para o formulário */
+    padding: 40px; /* Espaçamento interno */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 100%; /* Garante que o formulário se ajuste à largura da tela */
+    margin-left: 200px; /* ajuste o valor conforme necessário */
+}
+
+/* Estiliza os campos do formulário */
+.campo {
+    display: flex;
+    flex-direction: column; /* Coloca os rótulos e campos em coluna */
+    flex: 1; /* Permite que os campos ocupem o espaço disponível */
+    align-items: center; /* Centraliza os itens horizontalmente */
+}
+
+/* Estiliza os labels */
+.campo label, .resultado label {
+    text-align: center; /* Centraliza o texto do label */
+    width: 100%; /* Garante que o label use toda a largura disponível */
+    color: lightblue; /* Altera a cor do texto para branco */
+    margin-bottom: 5px; /* Adiciona um pequeno espaçamento abaixo do label */
+}
+
+/* Estiliza os campos de entrada */
+input, select {
+    padding: 10px; /* espaçamento interno */
+    border: 3px solid rgb(52, 124, 146); /* borda padrão */
+    border-radius: 50px; /* cantos arredondados */
+    font-size: 16px; /* tamanho da fonte */
+    transition: border-color 0.3s; /* transição suave */
+    color: black;
+    background-color: lightblue;
+}
+
+/* Efeito de foco em campos de entrada */
+input:focus, select:focus {
+    border-color: lightblue; /* borda verde ao focar */
+    outline: none; /* remove contorno padrão */
+}
+
+/* Alinha os campos de moeda de destino e resultado */
+#moedaDestino, .resultado input[type="text"] {
+    width: 155px; /* largura igual para ambos os campos */
+}
+
+/* Adiciona margem superior ao label "valor" */
+.campo label[for="valor"] {
+    margin-top: 20px; /* Ajuste o valor conforme necessário */
+}
+
+/* Estiliza o resultado */
+.resultado {
+    display: flex;
+    flex-direction: column; /* Coloca o rótulo e campo em coluna */
+    gap: 1px; /* Espaçamento entre rótulo e campo */
+    flex: 1; /* Permite que o resultado ocupe o espaço disponível */
+    align-items: flex-start; /* Alinha o rótulo e o campo à esquerda */
+}
+
+/* Estiliza a seta */
+.seta {
+    font-size:25px; /* Tamanho da seta */
+    align-self: center; /* Centraliza a seta verticalmente */
+    color: white;
+}
+
+/* Estiliza o botão */
+button {
+    background-color: #4CAF50; /* verde */
+    color: white; /* texto branco */
+    border: none; /* sem borda */
+    padding: 10px 20px; /* espaçamento interno */
+    border-radius: 25px; /* cantos arredondados para botão redondo */
+    font-size: 16px; /* tamanho da fonte */
+    cursor: pointer; /* cursor de mão ao passar o mouse */
+    transition: background-color 0.3s, box-shadow 0.3s; /* transição suave */
+}
+
+/* Efeito de sombreamento ao passar o mouse */
+button:hover {
+    background-color: #45a049; /* verde mais escuro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* sombra */
+}
+
+/* Estiliza a imagem que substitui o botão */
+#converterButton {
+    padding-left: 20px;
+    width: 90px; /* Ajuste a largura conforme necessário */
+    height: 80px; /* Ajuste a altura conforme necessário */
+    border-radius: 50px; /* Cantos arredondados para a imagem */
+    cursor: pointer; /* Cursor de mão ao passar o mouse */
+    transition: box-shadow 0.3s; /* Transição suave para sombra */
+}
+
+/* Animação de rotação */
+.rotate {
+    animation: rotation 1s forwards; /* 1 segundo para completar a rotação */
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+/* Efeito de sombreamento ao passar o mouse */
+#converterButton:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
+}
+
+/* Estiliza o contêiner da imagem e texto */
+.converter-container {
+    display: flex; /* Usando flexbox para controlar o layout */
+    flex-direction: column; /* Alinha os itens na coluna */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    margin-top: 10px; /* Espaçamento acima do contêiner */
+}
+
+/* Estiliza o texto abaixo da imagem do botão */
+#converterText {
+    text-align: center; /* Centraliza o texto */
+    color: #4CAF50; /* Cor verde */
+    margin-top: 0; /* Espaçamento acima do texto */
+    font-size: 16px; /* Tamanho da fonte */
+    font-weight: bold; /* Deixa o texto em negrito */
+}
+
+/* Estiliza a frase de observação */
+.observacao {
+    font-size: 15px; /* Tamanho da fonte */
+    color: #ff0000; /* Cor vermelha para destacar */
+    margin-top: 10px; /* Espaçamento acima da frase */
+    padding: 0; /* Remove o preenchimento */
+    text-align: center; /* Alinha o texto à esquerda */
+    font-size: 18px;
+}
+
+/* Estiliza o rodapé */
+footer {
+    background-color: #333; /* preto claro */
+    color: #4CAF50; /* cor do texto em verde */
+    text-align: center; /* centralizar texto */
+    padding: 3px; /* espaçamento interno */
+    font-size: 13px; /* tamanho da fonte */
+    width: 100%; /* ocupa toda a largura */
+    margin-top: auto; /* força o rodapé a ficar no final da página */
+    position: relative; /* garante que o footer esteja no final */
+}
